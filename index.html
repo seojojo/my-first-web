@@ -1,91 +1,135 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <title>나의 미니 웹앱</title>
-    <style>
-        body {
-            background-color: #f2f2f2;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            padding-top: 30px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Otter Couple Love Story</title>
 
-        img {
-            border-radius: 50%;
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-        }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #fef6ff, #ffe2f0);
+      font-family: "Pretendard", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        button {
-            padding: 12px 25px;
-            margin: 10px;
-            border: none;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      width: 380px;
+      padding: 32px;
+      border-radius: 28px;
+      text-align: center;
+      box-shadow: 0 18px 45px rgba(255, 140, 170, 0.25);
+      backdrop-filter: blur(8px);
+      animation: fadeInUp 0.8s ease-out;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
 
-        #message {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 8px solid #fff;
+      box-shadow: 0 12px 25px rgba(255, 150, 170, 0.28);
+      margin-bottom: 18px;
+      background: #fff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 800;
+      color: #ff6fae;
+    }
+
+    p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      margin: 18px 0 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      background: #ff8fbb;
+      color: white;
+      text-decoration: none;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: 0.22s ease;
+      box-shadow: 0 12px 25px rgba(255, 150, 170, 0.28);
+    }
+
+    .btn:hover {
+      background: #ff74ac;
+      transform: translateY(-3px);
+      box-shadow: 0 16px 30px rgba(255, 150, 170, 0.35);
+    }
+
+    .cute {
+      font-size: 22px;
+      margin-top: 20px;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .gallery {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.gallery img {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(255, 150, 170, 0.25);
+  transition: transform .2s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.07);
+}
+
+  </style>
 </head>
 <body>
+  <div class="card">
+    <img src="we.jpg" class="profile-img" alt="otter couple" />
+<div class="gallery">
+  <img src="we2.jpg" alt="couple photo">
+  <img src="we3.jpg" alt="couple photo">
+  <img src="we4.jpg" alt="couple photo">
+</div>
 
-    <h1>나의 첫 미니 웹앱</h1>
-    <p>버튼을 눌러 다양한 기능을 체험해보세요!</p>
+    <h1>정민 미성 커플의 하루 🦦💞</h1>
 
-    <!-- 기본 사진 -->
-    <img id="profileImg" src="사진1.jpg" />
+    <p>
+      서로 손 꼭 잡고 잠드는 수달처럼,  
+      우리 둘만의 달달한 순간들을 기록하는 공간이에요.  
+      귀여운 꽁냥 연애 숏츠 속 장면처럼요 ✨
+    </p>
 
-    <div>
-        <button onclick="changeImage()">사진 바꾸기</button>
-        <button onclick="randomMessage()">랜덤 문구</button>
-        <button onclick="changeColor()">배경색 바꾸기</button>
-    </div>
+    <a href="story.html" class="btn">커플 스토리 보기 🫶</a>
+<a href="couple-slide.html" class="btn">사진 슬라이드 보기 📸</a>
 
-    <p id="message"></p>
-
-    <script>
-        // (1) 사진 바꾸기
-        const images = ["강백호.jpg", "서태웅.jpg", "채치수.jpg"];
-        let currentImg = 0;
-
-        function changeImage() {
-            currentImg = (currentImg + 1) % images.length;
-            document.getElementById("profileImg").src = images[currentImg];
-        }
-
-        // (2) 랜덤 문구
-        const messages = [
-            "오늘도 파이팅! 🚀",
-            "너는 지금 배우고 있어. 멈추지 마!",
-            "작은 한 걸음이 큰 변화를 만든다.",
-            "개발은 재미있다! 😄",
-            "너는 이미 잘하고 있어!"
-        ];
-
-        function randomMessage() {
-            const randomIndex = Math.floor(Math.random() * messages.length);
-            document.getElementById("message").innerText = messages[randomIndex];
-        }
-
-        // (3) 배경색 바꾸기
-        function changeColor() {
-            const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
-            document.body.style.backgroundColor = randomColor;
-        }
-    </script>
-
+    <div class="cute">🦦💕🦦</div>
+  </div>
 </body>
 </html>

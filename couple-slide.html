@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커플 슬라이드</title>
+
+  <style>
+  body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #c4e7ff, #ffe8f2);
+  font-family: 'Pretendard', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 🦦 수달 테마 물결 박스 */
+.slider-container {
+  width: 90%;
+  max-width: 420px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 35px;
+  background: linear-gradient(180deg, #ffffff, #f7fbff);
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  border: 4px solid #a7d4ff;
+}
+
+/* 🦦 물파문 효과 */
+.slider-container::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.5), transparent);
+  filter: blur(40px);
+  animation: wave 5s ease-in-out infinite alternate;
+}
+
+@keyframes wave {
+  from { transform: rotate(0deg) scale(1.1); }
+  to { transform: rotate(3deg) scale(1.15); }
+}
+
+.slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+
+.slides img,
+.slides video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 35px;
+}
+
+/* 좌우 버튼 */
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.7);
+  border: none;
+  padding: 14px 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  color: #5c7da0;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: rgba(255,255,255,1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev { left: 12px; }
+.next { right: 12px; }
+
+/* 홈으로 버튼 */
+.back {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background: #8fc7ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 100px;
+  font-size: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: 0.25s;
+}
+
+.back:hover {
+  background: #70b9ff;
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* 🐾 수달 발자국 (귀여운 포인트) */
+.slider-container::after {
+  content: "🐾";
+  font-size: 36px;
+  position: absolute;
+  bottom: 70px;
+  right: 15px;
+  opacity: 0.25;
+  transform: rotate(-20deg);
+}
+
+/* 모바일 최적화 */
+@media (max-width: 480px) {
+  .slider-container {
+    height: 420px;
+    border-radius: 30px;
+  }
+  .btn {
+    padding: 10px 12px;
+    font-size: 18px;
+  }
+  .back {
+    bottom: 10px;
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}
+.slide {
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.slide.active {
+  opacity: 1;
+  position: relative;
+}
+  </style>
+</head>
+<body>
+
+  <div class="slider-container">
+    <div class="slides" id="slides">
+      <img src="seo.jpg" />
+      <img src="seo2.jpg" />
+      <img src="seo3.jpg" />
+      <img src="seo4.jpg" />
+
+       <video src="seo5.mp4" muted autoplay loop></video>
+    </div>
+
+    <button class="btn prev" onclick="moveSlide(-1)">❮</button>
+    <button class="btn next" onclick="moveSlide(1)">❯</button>
+
+    <a href="index.html" class="back">홈으로</a>
+  </div>
+
+<script>
+  let index = 0;
+  const slides = document.getElementById("slides");
+  const total = slides.children.length;
+
+  // ⭐ 슬라이드 전체 폭 자동 계산 추가 ⭐
+  slides.style.width = `${total * 100}%`;
+
+  // 각 슬라이드 폭 100% 자동 적용
+  for (let item of slides.children) {
+    item.style.width = `${100 / total}%`;
+    item.style.flexShrink = "0";
+  }
+
+  function showSlide() {
+    slides.style.transform = `translateX(${-index * (100 / total)}%)`;
+  }
+
+  function moveSlide(step) {
+    index = (index + step + total) % total;
+    showSlide();
+  }
+
+  // 자동재생
+  setInterval(() => {
+    moveSlide(1);
+  }, 3500);
+  // 📱 모바일 스와이프 기능 추가
+let startX = 0;
+let endX = 0;
+
+slides.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+slides.addEventListener("touchmove", (e) => {
+  endX = e.touches[0].clientX;
+});
+
+slides.addEventListener("touchend", () => {
+  let diff = startX - endX;
+
+  // 스와이프 감도(20px 이상 움직일 때만 동작)
+  if (Math.abs(diff) > 20) {
+    if (diff > 0) {
+      // 오른쪽 → 왼쪽 (다음 슬라이드)
+      moveSlide(1);
+    } else {
+      // 왼쪽 → 오른쪽 (이전 슬라이드)
+      moveSlide(-1);
+    }
+  }
+});
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>우리 커플 이야기</title>
+  <style>
+    body {
+  margin: 0;
+  background: #f8f1ec;
+  font-family: 'Pretendard', sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.story-container {
+  width: 90%;
+  max-width: 480px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* 제목 */
+.title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #5a4636;
+}
+
+/* 에피소드 블럭 */
+.episode {
+  margin-bottom: 40px;
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.story-img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.story-text {
+  font-size: 16px;
+  color: #5d4b40;
+  line-height: 1.5;
+}
+
+/* 돌아가기 버튼 */
+.back-btn {
+  display: block;
+  text-align: center;
+  margin: 30px 0;
+  padding: 12px;
+  background: #d5c0a1;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* 페이드인 효과 */
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 모바일 최적화 */
+@media (max-width: 600px) {
+  .title {
+    font-size: 24px;
+  }
+  .story-text {
+    font-size: 15px;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="style-story.css">
+</head>
+
+<body>
+
+<div class="story-container fade-in">
+
+  <h1 class="title">🐾 우리 수달 커플 이야기 🐾</h1>
+
+  <div class="episode">
+    <img src="oh1.jpg" class="story-img">
+    <p class="story-text">
+      미성기관사를 처음본날..💛
+    </p>
+  </div>
+
+  <div class="episode">
+    <img src="oh2.jpg" class="story-img">
+    <p class="story-text">
+      헬로키티한테 호되게 당했던 날..
+    </p>
+  </div>
+
+  <div class="episode">
+    <video class="story-img" src="oh.mp4" controls></video>
+    <p class="story-text">
+      미끄럼틀 타면서 신난 누나
+    </p>
+  </div>
+
+  <div class="episode">
+    <img src="oh3.png" class="story-img">
+    <p class="story-text">
+      앞으로도 손 놓지 않고 나아갈 우리 둘의 이야기… 🤎
+    </p>
+  </div>
+
+  <a href="index.html" class="back-btn">← 갤러리로 돌아가기</a>
+</div>
+
+</body>
+</html>
